@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>Ave Chess</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="msapplication-tap-highlight" content="no"/>
+<meta name="keywords" content="avechess chess"/>
+<meta name="google-site-verification" content="0RqVR_dMqUXx7vuYStX_ElrYrudHle4ScAejxmuHIi4" />
+<meta name="description" content="ave chess"/>
+<meta name="theme-color" content="#5c6bc0"/>
+<meta name="msapplication-TileColor" content="#ffffff"/>
+<meta name="msapplication-TileImage" content="favicon/mstile-144x144.png"/>
+<link rel="apple-touch-icon-precomposed" href="favicon/apple-touch-icon-152x152.png"/>
+<link rel="icon" href="favicon/favicon-32x32.png" sizes="32x32"/>
+<style>
+@font-face {
+font-family:'Lato';
+font-style:normal;
+font-weight:300;
+src: url(https://fonts.gstatic.com/s/lato/v17/S6u9w4BMUTPHh7USSwaPGR_p.woff2) format('woff2');
+unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+body{margin:0;padding:0;border:0;position:relative;min-height:100%;height:100%;font-family:Lato,sans-serif;}
+.sir{padding:15px;background-color:rgba(0,0,0,.2)}
+.icon-block{padding:0 15px}
+.icon-block.material-icons{font-size:inherit}
+.item{float:left}
+.prefix_bar{top:2px}
+.prefix_btn{top:3px}
+.prefix_menu{top:5px}
+.prefix_shop{top:11px}
+.prefix_car,.prefix_tel{position:relative;top:9px}
+.prefix_input{top:12px}
+.prefix_services{top:-2px}
+.cashsettop{top:15px}
+.tshadow{text-shadow:0 1px 2px rgba(0,0,0,.8)}
+.btnStat{width:200px}
+.btnStat2{width:250px}
+.cancel2:hover{opacity:1}
+.inptel{width: 200px;height: 27px;padding: 5px;font-size: 24px;font-weight: bolder;color:#424242;border: none;border-radius: 3px;box-shadow: 0 1px 2px rgba(0,0,0,.2) inset, 0 -1px 0 rgba(0,0,0,.05) inset;}
+.cssload-loader{
+position:relative;
+text-align:center;
+left:40%;
+left:calc(50% - 36px);
+width:72px;
+height:72px;
+border-radius:50%;
+-o-border-radius:50%;
+-ms-border-radius:50%;
+-webkit-border-radius:50%;
+-moz-border-radius:50%;
+}
+.cssload-inner{
+position:absolute;
+width:100%;
+height:100%;
+box-sizing:border-box;
+-o-box-sizing:border-box;
+-ms-box-sizing:border-box;
+-webkit-box-sizing:border-box;
+-moz-box-sizing:border-box;
+border-radius:50%;
+-o-border-radius:50%;
+-ms-border-radius:50%;
+-webkit-border-radius:50%;
+-moz-border-radius:50%;
+}
+.cssload-inner.cssload-one{
+left:0%;
+top:0%;
+border-bottom:3px solid rgb(84, 58, 183, 1);
+animation: cssload-rotate-one 1.6s linear infinite;
+-o-animation: cssload-rotate-one 1.6s linear infinite;
+-ms-animation: cssload-rotate-one 1.6s linear infinite;
+-webkit-animation: cssload-rotate-one 1.6s linear infinite;
+-moz-animation: cssload-rotate-one 1.6s linear infinite;
+}
+.cssload-inner.cssload-two{
+right:0%;
+top:0%;
+border-right:3px solid rgb(0, 172, 193, 1);
+animation: cssload-rotate-two 1.6s linear infinite;
+-o-animation: cssload-rotate-two 1.6s linear infinite;
+-ms-animation: cssload-rotate-two 1.6s linear infinite;
+-webkit-animation: cssload-rotate-two 1.6s linear infinite;
+-moz-animation: cssload-rotate-two 1.6s linear infinite;
+}
+.cssload-inner.cssload-three{
+right:0%;
+bottom:0%;
+border-top:3px solid rgb(249, 167, 43, 1);
+animation: cssload-rotate-three 1.6s linear infinite;
+-o-animation: cssload-rotate-three 1.6s linear infinite;
+-ms-animation: cssload-rotate-three 1.6s linear infinite;
+-webkit-animation: cssload-rotate-three 1.6s linear infinite;
+-moz-animation: cssload-rotate-three 1.6s linear infinite;
+}
+@keyframes cssload-rotate-one{
+0% {transform:rotateX(35deg) rotateY(-45deg) rotateZ(0deg);}
+100% {transform:rotateX(35deg) rotateY(-45deg) rotateZ(360deg);}
+}
+@-o-keyframes cssload-rotate-one{
+0% {-o-transform:rotateX(35deg) rotateY(-45deg) rotateZ(0deg);}
+100% {-o-transform:rotateX(35deg) rotateY(-45deg) rotateZ(360deg);}
+}
+@-ms-keyframes cssload-rotate-one{
+0% {-ms-transform:rotateX(35deg) rotateY(-45deg) rotateZ(0deg);}
+100% {-ms-transform:rotateX(35deg) rotateY(-45deg) rotateZ(360deg);}
+}
+@-webkit-keyframes cssload-rotate-one{
+0% {-webkit-transform:rotateX(35deg) rotateY(-45deg) rotateZ(0deg);}
+100% {-webkit-transform:rotateX(35deg) rotateY(-45deg) rotateZ(360deg);}
+}
+@-moz-keyframes cssload-rotate-one{
+0% {-moz-transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);}
+100% {-moz-transform: rotateX(35deg) rotateY(-45deg) rotateZ(360deg);}
+}
+@keyframes cssload-rotate-two{
+0% {transform:rotateX(50deg) rotateY(10deg) rotateZ(0deg);}
+100% {transform:rotateX(50deg) rotateY(10deg) rotateZ(360deg);}
+}
+@-o-keyframes cssload-rotate-two{
+0% {-o-transform:rotateX(50deg) rotateY(10deg) rotateZ(0deg);}
+100% {-o-transform:rotateX(50deg) rotateY(10deg) rotateZ(360deg);}
+}
+@-ms-keyframes cssload-rotate-two{
+0% {-ms-transform:rotateX(50deg) rotateY(10deg) rotateZ(0deg);}
+100% {-ms-transform:rotateX(50deg) rotateY(10deg) rotateZ(360deg);}
+}
+@-webkit-keyframes cssload-rotate-two{
+0% {-webkit-transform:rotateX(50deg) rotateY(10deg) rotateZ(0deg);}
+100% {-webkit-transform:rotateX(50deg) rotateY(10deg) rotateZ(360deg);}
+}
+@-moz-keyframes cssload-rotate-two{
+0% {-moz-transform:rotateX(50deg) rotateY(10deg) rotateZ(0deg);}
+100% {-moz-transform:rotateX(50deg) rotateY(10deg) rotateZ(360deg);}
+}
+@keyframes cssload-rotate-three{
+0% {transform:rotateX(35deg) rotateY(55deg) rotateZ(0deg);}
+100% {transform:rotateX(35deg) rotateY(55deg) rotateZ(360deg);}
+}
+@-o-keyframes cssload-rotate-three{
+0% {-o-transform:rotateX(35deg) rotateY(55deg) rotateZ(0deg);}
+100% {-o-transform:rotateX(35deg) rotateY(55deg) rotateZ(360deg);}
+}
+@-ms-keyframes cssload-rotate-three{
+0% {-ms-transform:rotateX(35deg) rotateY(55deg) rotateZ(0deg);}
+100% {-ms-transform:rotateX(35deg) rotateY(55deg) rotateZ(360deg);}
+}
+@-webkit-keyframes cssload-rotate-three{
+0% {-webkit-transform:rotateX(35deg) rotateY(55deg) rotateZ(0deg);}
+100% {-webkit-transform:rotateX(35deg) rotateY(55deg) rotateZ(360deg);}
+}
+@-moz-keyframes cssload-rotate-three{
+0% {-moz-transform:rotateX(35deg) rotateY(55deg) rotateZ(0deg);}
+100% {-moz-transform:rotateX(35deg) rotateY(55deg) rotateZ(360deg);}
+}
+h1{
+font-weight:300;
+letter-spacing:2px;
+font-size:48px;
+}
+.header{
+position:relative;
+text-align:center;
+background:linear-gradient(60deg, rgba(84, 58, 183, 1) 0%, rgba(0, 172, 193, 1) 100%);
+color:white;
+}
+.logo{
+width:50px;
+fill:white;
+padding-right:15px;
+display:inline-block;
+vertical-align:middle;
+}
+.inner-header{
+display:flex;
+flex-direction:column;
+justify-content:center;
+height:65vh;
+width:100%;
+margin:0;
+padding:0;
+}
+.inner-header a{margin:14px 14px}
+.flex{
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+}
+.waves{
+position:relative;
+width:100%;
+height:15vh;
+margin-bottom:-7px;
+min-height:100px;
+max-height:150px;
+}
+.content{
+position:relative;
+height:20vh;
+text-align:center;
+background-color:white;
+}
+.parallax>use{animation: move-forever 25s cubic-bezier(.55, .5, .45, .5) infinite;}
+.parallax>use:nth-child(1){animation-delay:-2s;animation-duration:7s;}
+.parallax>use:nth-child(2){animation-delay:-3s;animation-duration:10s;}
+.parallax>use:nth-child(3){animation-delay:-4s;animation-duration:13s;}
+.parallax>use:nth-child(4){animation-delay:-5s;animation-duration:20s;}
+@keyframes move-forever{
+0% {transform: translate3d(-90px, 0, 0);}
+100% {transform: translate3d(85px, 0, 0);}
+}
+@media (max-width:768px){
+.waves{height:40px;min-height: 40px;}
+.content{height:30vh;}
+h1{font-size:24px;}
+}
+.button{
+color:#ffffff;
+border:none;
+text-align:center;
+text-decoration:none;
+display:inline-block;
+font-size:20px;
+cursor:pointer;
+text-shadow:0px 2px 6px rgba(0,0,0,0.4);
+}
+.button:hover{color:#f9a72b;}
+</style>
+</head>
+
+<body>
+<div class="header">
+    <div class="inner-header">
+		<div class="cssload-loader">
+	        <div class="cssload-inner cssload-one"></div>
+	        <div class="cssload-inner cssload-two"></div>
+	        <div class="cssload-inner cssload-three"></div>
+	    </div>
+	    <br/><br/>
+	    <div>
+	    	<i style="font-size:48px; font-weight:700; text-shadow:0px 2px 6px rgba(0,0,0,0.4);">AveChess</i>
+	    </div>
+	    <br/>
+	    <div>
+	        <a onclick="javascript:login('login.php');" class="button">Login</a> 
+	    </div>
+    </div>
+    <!--Waves Container-->
+    <div>
+        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+            <defs>
+                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+            </defs>
+            <g class="parallax">
+                <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+                <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+                <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+                <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+            </g>
+        </svg>
+    </div>
+    <!--Waves end-->
+</div>
+<div class="content flex" style="font-size:14px; color:#333333;">Victor Palchey & Volodymyr Didyk<b style="color:#ef5350;">&nbsp;&nbsp;•&nbsp;&nbsp;</b>2022<br/></div>
+<script>function login(s){document.location.href=s;}</script>
+</body>
+</html>
