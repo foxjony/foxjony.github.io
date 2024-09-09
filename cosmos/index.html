@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<title>ThreeJS</title>
+</head>
+
+<body style="margin: 0; background-color: #000000">
+<script src="js/Three.js"></script>
+<script src="js/Detector.js"></script>
+<script src="js/Stats.js"></script>
+<script src="js/OrbitControls.js"></script>
+<script src="js/KeyboardState.js"></script>
+<script src="js/THREEx.FullScreen.js"></script>
+<script src="js/THREEx.WindowResize.js"></script>
+<div id="ThreeJS" style="position: absolute; left: 0px; top: 0px"></div>
+<script>
+console.log("START");
+var container, scene, camera, renderer, controls, z = 0;
+var keyboard = new KeyboardState();
+var clock = new THREE.Clock();
+
+init();
+animate();
+
+function init() {
+	// SCENE
+	scene = new THREE.Scene();
+	
+	// CAMERA
+	var SCREEN_WIDTH  = window.innerWidth;
+	var SCREEN_HEIGHT = window.innerHeight;
+	var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH/SCREEN_HEIGHT, NEAR = 0.1, FAR = 10000;
+	
+	camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR);
+	scene.add(camera);
+	camera.position.set(0, 150, 400);
+	camera.lookAt(scene.position);	
+	
+	// RENDERER
+	if (Detector.webgl) {renderer = new THREE.WebGLRenderer({antialias: true});}
+	else {renderer = new THREE.CanvasRenderer();}
+	renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+	
+	container = document.getElementById('ThreeJS');
+	container.appendChild(renderer.domElement);
+	
+	// EVENTS
+	THREEx.WindowResize(renderer, camera);
+	THREEx.FullScreen.bindKey({charCode: 'm'.charCodeAt(0)});
+	
+	// CONTROLS
+	controls = new THREE.OrbitControls(camera, renderer.domElement);
+	
+	var geometry2 = new THREE.SphereGeometry(1, 16, 16);
+	var material2 = new THREE.MeshNormalMaterial();
+	var sphere = new THREE.Mesh(geometry2, material2);
+
+	// 6318161
+	for (var i=0; i<50000; i++) {				// 50000
+		//let x = randomInteger(0, 255);
+		//let y = randomInteger(0, 255);
+		//let z = 0;
+		let x = randomInteger(-1000, 1000);
+		let y = randomInteger(-1000, 1000);
+		let z = randomInteger(-1000, 1000);
+		var sphere = new THREE.Mesh(geometry2, material2);
+		sphere.position.set(x, y, z);
+		scene.add(sphere);
+	}
+}
+
+function animate() {
+	//if (keyboard.pressed("z")) {z = 1;}
+	//if (z == 1) {camera.position.z -= 1;}
+	// += 1 - віддалення, -= 1 - приближення, // - без руху
+	camera.position.z -= 1;
+	requestAnimationFrame(animate);
+	renderer.render(scene, camera);
+	controls.update();
+}
+
+function randomInteger(min, max) {return Math.floor(min+Math.random()*(max+1-min));}
+
+// FRNG - Fast Random Numbers Generanor - https://youtu.be/G6MROvlLeKE?t=456
+var x=12345, y=6789, z=42, w=1729; 			// Work in C++, No Work in JS !!!
+function xorshift16() {var t=x^(x<<5); x=y; y=z; z=w; w=w^(w>>1)^t^(t>>3); return w&0xFFFF;}
+
+
+// https://www.30secondsofcode.org/js/s/hash-sha-256/
+const hashValue = val => crypto.subtle
+    .digest('SHA-256', new TextEncoder('utf-8').encode(val))
+    .then(h => {
+      let hexes = [], view = new DataView(h);
+      for (let i = 0; i < view.byteLength; i += 4)
+        hexes.push(('00000000' + view.getUint32(i).toString(16)).slice(-8));
+      return hexes.join('');
+    });
+
+hashValue(JSON.stringify({a: 'a', b: [1, 2, 3, 4], foo: { c: 'bar' }})).then(console.log);
+// '04aa106279f5977f59f9067fa9712afc4aedc6f5862a8defc34552d8c7206393'
+
+
+// https://remarkablemark.medium.com/how-to-generate-a-sha-256-hash-with-javascript-d3b2696382fd
+function hash(string) {
+  const utf8 = new TextEncoder().encode(string);
+  return crypto.subtle.digest('SHA-256', utf8).then((hashBuffer) => {
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray
+      .map((bytes) => bytes.toString(16).padStart(2, '0'))
+      .join('');
+    return hashHex;
+  });
+}
+
+/*
+async function hash(string) {
+  const utf8 = new TextEncoder().encode(string);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', utf8);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hashHex = hashArray
+    .map((bytes) => bytes.toString(16).padStart(2, '0'))
+    .join('');
+  return hashHex;
+}
+*/
+
+hash('foo').then((hex) => console.log(hex));
+// '2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae'
+</script>
+</body>
+</html>
