@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Gamepad Log</title>
+</head>
+<body>
+<h1>Gamepad</h1>
+<h1 id="output0"></h1>
+<h1 id="output1"></h1>
+<script>
+    const refreshRate = 100;
+    const output0 = document.getElementById('output0');
+    const output1 = document.getElementById('output1');
+    setInterval(getGamepadState, refreshRate);
+
+    function getGamepadState() {
+        const gamepads = navigator.getGamepads();   // Returns up to 4 gamepads.
+        const gamepad0 = gamepads[0];
+        const gamepad1 = gamepads[1];
+        if (!gamepad0) {output0.innerHTML = `Gamepad 1 No Found.\n`;}
+        if (!gamepad1) {output1.innerHTML = `Gamepad 2 No Found.\n`;}
+        if (gamepad0) {
+            const pressedButtons0 = gamepad0.buttons.map((button, id) => ({id, button})).filter(isPressed0);
+            for (const button of pressedButtons0) {
+                console.log(button); log0(`Gamepad 1 Button pressed: ${button.id}`)
+            }
+        }
+        if (gamepad1) {
+            const pressedButtons1 = gamepad1.buttons.map((button, id) => ({id, button})).filter(isPressed1);
+            for (const button of pressedButtons1) {
+                console.log(button); log1(`Gamepad 2 Button pressed: ${button.id}`)
+            }
+        }
+    }
+    function isPressed0({button: {pressed}}) {return !!pressed;}
+    function isPressed1({button: {pressed}}) {return !!pressed;}
+    function log0(message) {
+        const date = new Date().toISOString();
+        output0.innerHTML = `${date}: ${message}\n`;
+    }
+    function log1(message) {
+        const date = new Date().toISOString();
+        output1.innerHTML = `${date}: ${message}\n`;
+    }
+</script>
+</body>
+</html>
