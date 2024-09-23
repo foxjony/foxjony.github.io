@@ -30,7 +30,11 @@ body{margin: 0; padding: 0; border: 0; font-size: 21px; font-family:sans-serif;}
 <body>
 <div class="logo"><span class="l" onclick='i()'>48 законов власти.</span>&nbsp;<span class="l" onclick='a()'>Роберт Грин.</span></div>
 <div id="n" class="n"></div>
-<div id="text" class="text" onclick='s()'></div>
+<div id="text" class="text"></div>
+<div class="n">
+    <input type="range" id="mySlider" min="0" max="100" value="0" step="1">&nbsp;&nbsp;
+    <span id="sliderValue">00:00</span>&nbsp;/&nbsp;<span id="max">00:00</span>
+</div>
 <div id="player"></div>
 <table class="table">
 <tr><td>
@@ -95,88 +99,142 @@ body{margin: 0; padding: 0; border: 0; font-size: 21px; font-family:sans-serif;}
 <script src="https://www.youtube.com/iframe_api"></script>
 <script>
 var player;
-var mid;
-var pl = 0;
+var mid = "";
+var time = 0;
+var time_val = 0;
+var pl = 1;
 var arr = [
-    ['35Zt86lnonw', 'НИКОГДА НЕ ЗАТМЕВАЙ ГОСПОДИНА'], 
-    ['pRbGMOqJY7c', 'НЕ ДОВЕРЯЙ ДРУЗЬЯМ БЕЗГРАНИЧНО, НАУЧИСЬ ИСПОЛЬЗОВАТЬ ВРАГОВ'], 
-    ['0TuZOGucMi0', 'СКРЫВАЙ СВОИ НАМЕРЕНИЯ'],
-    ['wzTrmh79CV0', 'ВСЕГДА ГОВОРИ МЕНЬШЕ, ЧЕМ КАЖЕТСЯ НЕОБХОДИМЫМ'],
-    ['A8xrPSrIRaY', 'ОЧЕНЬ МНОГОЕ ЗАВИСИТ ОТ РЕПУТАЦИИ - БЕРЕГИ ЕЕ ЦЕНОЙ ЖИЗНИ'],
-    ['p-UgkQDOyJo', 'ЗАВОЕВЫВАЙ ВНИМАНИЕ ЛЮБОЙ ЦЕНОЙ'],
-    ['h8MM4DkXvyY', 'ЗАСТАВЬ ДРУГИХ РАБОТАТЬ НА СЕБЯ И ПОЛЬЗУЙСЯ РЕЗУЛЬТАТАМИ'],
-    ['2NdXzk5xEWc', 'ВЫНУЖДАЙ ЛЮДЕЙ ПОДОЙТИ К СЕБЕ, ЕСЛИ НУЖНО, ИСПОЛЬЗУЙ ПРИМАНКУ'],
-    ['j4Xlcxw9IS4', 'ДОБИВАЙСЯ ПОБЕДЫ ДЕЙСТВИЯМИ, А НЕ ДОВОДАМИ'],
-    ['NTjSOHfmfnU', 'ИНФЕКЦИЯ: ИЗБЕГАЙ НЕВЕСЕЛЫХ И НЕВЕЗУЧИХ'],
-    ['q9Wfp45B5vk', 'СТАРАЙСЯ, ЧТОБЫ ЛЮДИ ЗАВИСЕЛИ ОТ ТЕБЯ'],
-    ['XMD0pSF7QJY', 'ПРОЯВЛЯЙТЕ ИНОГДА ЧЕСТНОСТЬ И ЩЕДРОСТЬ, ЧТОБЫ ОБЕЗОРУЖИТЬ СВОЮ ЖЕРТВУ'],
-    ['JfPKGRJhIhg', 'ПРОСЯ О ПОМОЩИ, ВЗЫВАЙ К СВОЕКОРЫСТИЮ ЛЮДЕЙ И НИКОГДА - К ИХ МИЛОСТИ ИЛИ ВЕЛИКОДУШИЮ'],
-    ['JlehYKd4zjE', 'ИГРАЙ РОЛЬ ДРУГА, ДЕЙСТВУЙ, КАК ШПИОН'],
-    ['xT2rPwT8rqw', 'РАЗБЕЙ ВРАГА ПОЛНОСТЬЮ'],
-    ['M7rHwak7F2Y', 'ИСПОЛЬЗУЙ СВОЕ ОТСУТСТВИЕ, ЧТОБЫ ПРЕУМНОЖИТЬ УВАЖЕНИЕ И ЧЕСТЬ'],
-    ['o2zX33hRNkw', 'ДЕРЖИ ДРУГИХ В ПОДВЕШЕННОМ СОСТОЯНИИ: ПОДДЕРЖИВАЙ АТМОСФЕРУ НЕПРЕДСКАЗУЕМОСТИ'],
-    ['8IIMXhZM3WY', 'НЕ СТРОЙ КРЕПОСТЕЙ, ЧТОБЫ ЗАЩИТИТЬ СЕБЯ: ИЗОЛЯЦИЯ ОПАСНА'],
-    ['jxiSyjD9aGA', 'ЗНАЙ, С КЕМ ИМЕЕШЬ ДЕЛО: НЕ НАНОСИ ОБИДУ КОМУ НЕ СЛЕДУЕТ'],
-    ['53_9JdLMAvg', 'НИ С КЕМ НЕ ОБЪЕДИНЯЙСЯ'],
-    ['Szs0cCX_rjk', 'ПРИКИНЬСЯ ПРОСТАКОМ, ЧТОБЫ НАДУТЬ ПРОСТАКА: КАЖИСЬ ГЛУПЕЕ СВОЕЙ МИШЕНИ'],
-    ['pjBc_ui0Izg', 'ИСПОЛЬЗУЙ ТАКТИКУ КАПИТУЛЯЦИИ: ОБРАТИ СЛАБОСТИ В СИЛУ'],
-    ['QShklkwrcVY', 'КОНЦЕНТРИРУЙ СВОИ СИЛЫ'],
-    ['lD8V43yXmpk', 'ПОСТУПАЙ КАК ИСТИННЫЙ ПРИДВОРНЫЙ'],
-    ['cMmXlTMaBaI', 'СОТВОРИ СЕБЯ ЗАНОВО'],
-    ['2sO8xDMRyaY', 'ДЕРЖИ РУКИ ЧИСТЫМИ'],
-    ['oiYu1ZcYWDs', 'ИГРАЙ НА НУЖДАХ ЛЮДЕЙ, СОЗДАВАЯ АРМИЮ ФАНАТИЧНЫХ ПРИВЕРЖЕНЦЕВ'],
-    ['JbmXuz_oh6o', 'ПРИСТУПАЙ К ДЕЛУ БЕЗ КОЛЕБАНИЙ'],
-    ['Pz8LuDqleZ4', 'ПЛАНИРУЙ ВСЕ ДО САМОГО КОНЦА'],
-    ['rSTDkzJAzGY', 'ДОБИВАЯСЬ УСПЕХА, НЕ ПОКАЗЫВАЙ УСИЛИЙ'],
-    ['cq3zbDvFIOg', 'КОНТРОЛИРУЙ ВСЕ ВАРИАНТЫ: ПУСТЬ ДРУГИЕ ИГРАЮТ КАРТАМИ, КОТОРЫЕ СДАЕШЬ ТЫ'],
-    ['7W_lLMpD6Ys', 'ИГРАЙ НА ЛЮДСКИХ ФАНТАЗИЯХ'],
-    ['cALZMGG9uMc', 'ЗНАЙ СЛАБЫЕ СТРУНКИ КАЖДОГО ЧЕЛОВЕКА'],
-    ['lBE5cT_HVsg', 'БУДЬ ЦАРСТВЕННЫМ НА СВОЙ МАНЕР: ВЕДИ СЕБЯ КАК КОРОЛЬ - И БУДЕШЬ ПРИНЯТ КАК КОРОЛЬ'],
-    ['uNhH4mXqWmM', 'ОВЛАДЕЙ ИСКУССТВОМ УПРАВЛЕНИЯ ВРЕМЕНЕМ'],
-    ['kuF564g9-5s', 'ПРЕЗИРАЙ ТО, ЧЕМ НЕ МОЖЕШЬ ОБЛАДАТЬ: ИГНОРИРОВАНИЕ - ЛУЧШАЯ МЕСТЬ'],
-    ['e9lgzzzF9Rk', 'СОЗДАВАЙ НЕЗАБЫВАЕМЫЕ ЗРЕЛИЩА'],
-    ['YO-ujqm0O6Y', 'ДУМАЙ ЧТО ХОЧЕШЬ, НО ДЕЙСТВУЙ КАК ВСЕ'],
-    ['4HHhvjG1X34', 'МУТИ ВОДУ, ЧТОБЫ ПОЙМАТЬ РЫБКУ'],
-    ['Hj3tQT9jjKc', 'С ПРЕЗРЕНИЕМ ОТВЕРГАЙ БЕСПЛАТНЫЕ ОБЕДЫ'],
-    ['KR5XWgsP85Q', 'СТАРАЙСЯ НЕ ИДТИ СЛЕДОМ ЗА ВЕЛИКИМИ'],
-    ['d3V3pcisYKE', 'ПОРАЗИ ПАСТЫРЯ - И ПАСТВА РАССЕЕТСЯ'],
-    ['mZggjWzq_-M', 'ЗАВОЕВЫВАЙ СЕРДЦА И УМЫ ОКРУЖАЮЩИХ'],
-    ['TSDlB2gQUfU', 'ОБЕЗОРУЖИВАЙ И ПРИВОДИ В ЯРОСТЬ С ПОМОЩЬЮ ЭФФЕКТА ЗЕРКАЛА'],
-    ['TWdFBoZPRLI', 'ПРОПОВЕДУЙ НЕОБХОДИМОСТЬ ПЕРЕМЕН, НО НЕ СЛИШКОМ УВЛЕКАЙСЯ РЕФОРМАМИ'],
-    ['waL_HVzUvb0', 'НИ В КОЕМ СЛУЧАЕ НЕ КАЖИСЬ СЛИШКОМ СОВЕРШЕННЫМ'],
-    ['WNWEXmgV5zg', 'НЕ ЗАХОДИ ДАЛЬШЕ НАМЕЧЕННОЙ ЦЕЛИ; ПОБЕЖДАЯ, ЗНАЙ, КОГДА ОСТАНОВИТЬСЯ'],
-    ['BnmsIpuC4Bs', 'ОБРЕТИ НЕОПРЕДЕЛЕННОСТЬ ФОРМЫ']
+    ['35Zt86lnonw', '18:54', 'НИКОГДА НЕ ЗАТМЕВАЙ ГОСПОДИНА'], 
+    ['pRbGMOqJY7c', '28:03', 'НЕ ДОВЕРЯЙ ДРУЗЬЯМ БЕЗГРАНИЧНО, НАУЧИСЬ ИСПОЛЬЗОВАТЬ ВРАГОВ'], 
+    ['0TuZOGucMi0', '49:13', 'СКРЫВАЙ СВОИ НАМЕРЕНИЯ'],
+    ['wzTrmh79CV0', '18:16', 'ВСЕГДА ГОВОРИ МЕНЬШЕ, ЧЕМ КАЖЕТСЯ НЕОБХОДИМЫМ'],
+    ['A8xrPSrIRaY', '23:28', 'ОЧЕНЬ МНОГОЕ ЗАВИСИТ ОТ РЕПУТАЦИИ - БЕРЕГИ ЕЕ ЦЕНОЙ ЖИЗНИ'],
+    ['p-UgkQDOyJo', '34:19', 'ЗАВОЕВЫВАЙ ВНИМАНИЕ ЛЮБОЙ ЦЕНОЙ'],
+    ['h8MM4DkXvyY', '17:26', 'ЗАСТАВЬ ДРУГИХ РАБОТАТЬ НА СЕБЯ И ПОЛЬЗУЙСЯ РЕЗУЛЬТАТАМИ'],
+    ['2NdXzk5xEWc', '09:14', 'ВЫНУЖДАЙ ЛЮДЕЙ ПОДОЙТИ К СЕБЕ, ЕСЛИ НУЖНО, ИСПОЛЬЗУЙ ПРИМАНКУ'],
+    ['j4Xlcxw9IS4', '22:52', 'ДОБИВАЙСЯ ПОБЕДЫ ДЕЙСТВИЯМИ, А НЕ ДОВОДАМИ'],
+    ['NTjSOHfmfnU', '21:02', 'ИНФЕКЦИЯ: ИЗБЕГАЙ НЕВЕСЕЛЫХ И НЕВЕЗУЧИХ'],
+    ['q9Wfp45B5vk', '22:56', 'СТАРАЙСЯ, ЧТОБЫ ЛЮДИ ЗАВИСЕЛИ ОТ ТЕБЯ'],
+    ['XMD0pSF7QJY', '18:33', 'ПРОЯВЛЯЙТЕ ИНОГДА ЧЕСТНОСТЬ И ЩЕДРОСТЬ, ЧТОБЫ ОБЕЗОРУЖИТЬ СВОЮ ЖЕРТВУ'],
+    ['JfPKGRJhIhg', '17:46', 'ПРОСЯ О ПОМОЩИ, ВЗЫВАЙ К СВОЕКОРЫСТИЮ ЛЮДЕЙ И НИКОГДА - К ИХ МИЛОСТИ ИЛИ ВЕЛИКОДУШИЮ'],
+    ['JlehYKd4zjE', '14:46', 'ИГРАЙ РОЛЬ ДРУГА, ДЕЙСТВУЙ, КАК ШПИОН'],
+    ['xT2rPwT8rqw', '25:34', 'РАЗБЕЙ ВРАГА ПОЛНОСТЬЮ'],
+    ['M7rHwak7F2Y', '23:06', 'ИСПОЛЬЗУЙ СВОЕ ОТСУТСТВИЕ, ЧТОБЫ ПРЕУМНОЖИТЬ УВАЖЕНИЕ И ЧЕСТЬ'],
+    ['o2zX33hRNkw', '19:06', 'ДЕРЖИ ДРУГИХ В ПОДВЕШЕННОМ СОСТОЯНИИ: ПОДДЕРЖИВАЙ АТМОСФЕРУ НЕПРЕДСКАЗУЕМОСТИ'],
+    ['8IIMXhZM3WY', '23:42', 'НЕ СТРОЙ КРЕПОСТЕЙ, ЧТОБЫ ЗАЩИТИТЬ СЕБЯ: ИЗОЛЯЦИЯ ОПАСНА'],
+    ['jxiSyjD9aGA', '25:28', 'ЗНАЙ, С КЕМ ИМЕЕШЬ ДЕЛО: НЕ НАНОСИ ОБИДУ КОМУ НЕ СЛЕДУЕТ'],
+    ['53_9JdLMAvg', '35:45', 'НИ С КЕМ НЕ ОБЪЕДИНЯЙСЯ'],
+    ['Szs0cCX_rjk', '19:08', 'ПРИКИНЬСЯ ПРОСТАКОМ, ЧТОБЫ НАДУТЬ ПРОСТАКА: КАЖИСЬ ГЛУПЕЕ СВОЕЙ МИШЕНИ'],
+    ['pjBc_ui0Izg', '22:36', 'ИСПОЛЬЗУЙ ТАКТИКУ КАПИТУЛЯЦИИ: ОБРАТИ СЛАБОСТИ В СИЛУ'],
+    ['QShklkwrcVY', '19:17', 'КОНЦЕНТРИРУЙ СВОИ СИЛЫ'],
+    ['lD8V43yXmpk', '40:15', 'ПОСТУПАЙ КАК ИСТИННЫЙ ПРИДВОРНЫЙ'],
+    ['cMmXlTMaBaI', '27:28', 'СОТВОРИ СЕБЯ ЗАНОВО'],
+    ['2sO8xDMRyaY', '53:39', 'ДЕРЖИ РУКИ ЧИСТЫМИ'],
+    ['oiYu1ZcYWDs', '45:20', 'ИГРАЙ НА НУЖДАХ ЛЮДЕЙ, СОЗДАВАЯ АРМИЮ ФАНАТИЧНЫХ ПРИВЕРЖЕНЦЕВ'],
+    ['JbmXuz_oh6o', '29:32', 'ПРИСТУПАЙ К ДЕЛУ БЕЗ КОЛЕБАНИЙ'],
+    ['Pz8LuDqleZ4', '30:02', 'ПЛАНИРУЙ ВСЕ ДО САМОГО КОНЦА'],
+    ['rSTDkzJAzGY', '29:45', 'ДОБИВАЯСЬ УСПЕХА, НЕ ПОКАЗЫВАЙ УСИЛИЙ'],
+    ['cq3zbDvFIOg', '22:04', 'КОНТРОЛИРУЙ ВСЕ ВАРИАНТЫ: ПУСТЬ ДРУГИЕ ИГРАЮТ КАРТАМИ, КОТОРЫЕ СДАЕШЬ ТЫ'],
+    ['7W_lLMpD6Ys', '22:04', 'ИГРАЙ НА ЛЮДСКИХ ФАНТАЗИЯХ'],
+    ['cALZMGG9uMc', '39:24', 'ЗНАЙ СЛАБЫЕ СТРУНКИ КАЖДОГО ЧЕЛОВЕКА'],
+    ['lBE5cT_HVsg', '29:32', 'БУДЬ ЦАРСТВЕННЫМ НА СВОЙ МАНЕР: ВЕДИ СЕБЯ КАК КОРОЛЬ - И БУДЕШЬ ПРИНЯТ КАК КОРОЛЬ'],
+    ['uNhH4mXqWmM', '34:00', 'ОВЛАДЕЙ ИСКУССТВОМ УПРАВЛЕНИЯ ВРЕМЕНЕМ'],
+    ['kuF564g9-5s', '32:15', 'ПРЕЗИРАЙ ТО, ЧЕМ НЕ МОЖЕШЬ ОБЛАДАТЬ: ИГНОРИРОВАНИЕ - ЛУЧШАЯ МЕСТЬ'],
+    ['e9lgzzzF9Rk', '27:26', 'СОЗДАВАЙ НЕЗАБЫВАЕМЫЕ ЗРЕЛИЩА'],
+    ['YO-ujqm0O6Y', '29:43', 'ДУМАЙ ЧТО ХОЧЕШЬ, НО ДЕЙСТВУЙ КАК ВСЕ'],
+    ['4HHhvjG1X34', '27:10', 'МУТИ ВОДУ, ЧТОБЫ ПОЙМАТЬ РЫБКУ'],
+    ['Hj3tQT9jjKc', '1:01:22', 'С ПРЕЗРЕНИЕМ ОТВЕРГАЙ БЕСПЛАТНЫЕ ОБЕДЫ'],
+    ['KR5XWgsP85Q', '41:08', 'СТАРАЙСЯ НЕ ИДТИ СЛЕДОМ ЗА ВЕЛИКИМИ'],
+    ['d3V3pcisYKE', '28:37', 'ПОРАЗИ ПАСТЫРЯ - И ПАСТВА РАССЕЕТСЯ'],
+    ['mZggjWzq_-M', '31:09', 'ЗАВОЕВЫВАЙ СЕРДЦА И УМЫ ОКРУЖАЮЩИХ'],
+    ['TSDlB2gQUfU', '53:32', 'ОБЕЗОРУЖИВАЙ И ПРИВОДИ В ЯРОСТЬ С ПОМОЩЬЮ ЭФФЕКТА ЗЕРКАЛА'],
+    ['TWdFBoZPRLI', '28:24', 'ПРОПОВЕДУЙ НЕОБХОДИМОСТЬ ПЕРЕМЕН, НО НЕ СЛИШКОМ УВЛЕКАЙСЯ РЕФОРМАМИ'],
+    ['waL_HVzUvb0', '41:59', 'НИ В КОЕМ СЛУЧАЕ НЕ КАЖИСЬ СЛИШКОМ СОВЕРШЕННЫМ'],
+    ['WNWEXmgV5zg', '29:14', 'НЕ ЗАХОДИ ДАЛЬШЕ НАМЕЧЕННОЙ ЦЕЛИ; ПОБЕЖДАЯ, ЗНАЙ, КОГДА ОСТАНОВИТЬСЯ'],
+    ['BnmsIpuC4Bs', '45:31', 'ОБРЕТИ НЕОПРЕДЕЛЕННОСТЬ ФОРМЫ']
 ];
+
+var slider = document.getElementById('mySlider');
+var sliderValue = document.getElementById('sliderValue');
+
+slider.addEventListener('input', function() {
+    player.loadVideoById({videoId: mid, startSeconds: slider.value});
+    time_val = parseInt(slider.value, 10);
+    var hours = Math.floor(time_val/3600);
+    var minutes = Math.floor((time_val%3600)/60);
+    var seconds = time_val%60;
+    if (minutes < 10) {minutes = "0"+minutes}
+    if (seconds < 10) {seconds = "0"+seconds}
+    if (hours == 0) {sliderValue.textContent = minutes+":"+seconds;}
+    else {sliderValue.textContent = hours+":"+minutes+":"+seconds;}
+    pl = 0;
+});
+
+setInterval(function () {
+    if (pl != 1) {
+        time_val = parseInt(time_val, 10)+1;
+        if (time_val >= time) {pl = 1;}
+        slider.value = time_val;
+        var hours = Math.floor(time_val/3600);
+        var minutes = Math.floor((time_val%3600)/60);
+        var seconds = time_val%60;
+        if (minutes < 10) {minutes = "0"+minutes}
+        if (seconds < 10) {seconds = "0"+seconds}
+        if (hours == 0) {sliderValue.textContent = minutes+":"+seconds;}
+        else {sliderValue.textContent = hours+":"+minutes+":"+seconds;}
+    }
+}, 1000);
 
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {height: '0', width: '0', playerVars: {'autoplay': 0, 'controls': 0,}});
 }
 
 function i() {
-    player.loadVideoById("5el2h8IGhoc"); mid = 49; pl = 0;
+    mid = '5el2h8IGhoc'; pl = 0; time_val = 0; time = 1788;
+    slider.value = time_val; slider.max = time;
+    player.loadVideoById(mid);
     document.getElementById('n').innerText = "";
     document.getElementById('text').innerText = "Предисловие";
+    document.getElementById('sliderValue').innerText = '00:00';
+    document.getElementById('max').innerText = '29:48';
 }
 
 function a() {
-    player.loadVideoById("rqedHacqS00"); mid = 50; pl = 0;
+    mid = 'rqedHacqS00'; pl = 0; time_val = 0; time = 700;
+    slider.value = time_val; slider.max = time;
+    player.loadVideoById(mid);
     document.getElementById('n').innerText = "";
     document.getElementById('text').innerText = "Почему Роберт Грин написал 48 законов власти";
-}
-
-function s() {
-    player.stopVideo(); pl = 0; mid = "";
-    document.getElementById('n').innerText = "";
-    document.getElementById('text').innerText = "";
+    document.getElementById('sliderValue').innerText = '00:00';
+    document.getElementById('max').innerText = '11:40';
 }
 
 function l(n) {
+    var hours = 0;
+    var minutes = 0;
+    var sec = 0;
     var id = arr[n-1][0];
-    var name = arr[n-1][1];
-    document.getElementById('n').innerText = "Закон "+n;
-    document.getElementById('text').innerText = name;
-    if (id != mid) {player.loadVideoById(id); mid = id; pl = 0;}
-    else {
+    var t = arr[n-1][1];
+    var name = arr[n-1][2];
+    var parts = t.split(":");
+    var size = parts.length;
+    if (id != mid) {
+        if (size == 2) {
+            minutes = parseInt(parts[0], 10);
+            sec = parseInt(parts[1], 10);
+        } else if (size == 3) {
+            hours = parseInt(parts[0], 10);
+            minutes = parseInt(parts[1], 10);
+            sec = parseInt(parts[2], 10);
+        }
+        time = (hours*3600)+(minutes*60)+sec;
+        document.getElementById('n').innerText = "Закон "+n;
+        document.getElementById('text').innerText = name;
+        document.getElementById('sliderValue').innerText = '00:00';
+        document.getElementById('max').innerText = t;
+        player.loadVideoById(id);
+        mid = id; pl = 0; time_val = 0; slider.value = time_val; slider.max = time;
+    } else {
         if (pl == 0) {player.pauseVideo(); pl = 1;}
         else {player.playVideo(); pl = 0;}
     }
