@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<title>48 законов власти</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta name="msapplication-tap-highlight" content="no"/>
+<meta name="description" content="48 законов власти"/>
+<meta name="Owner" content="48 законов власти">
+<meta name="theme-color" content="#5c6bc0"/>
+<meta name="msapplication-TileColor" content="#ffffff"/>
+<meta name="msapplication-TileImage" content="favicon/mstile-144x144.png"/>
+<link rel="apple-touch-icon-precomposed" href="favicon/apple-touch-icon-152x152.png"/>
+<link rel="icon" href="favicon/favicon-32x32.png" sizes="32x32"/>
+<style>
+body{margin: 0; padding: 0; border: 0; font-size: 14px; font-family:sans-serif;}
+.logo{display: flex; justify-content: center; align-items: center; margin: 20px; font-size: 26px; color: #333333;}
+.n{display: flex; justify-content: center; align-items: center; margin: 20px; font-size: 16px; color: #e65100;}
+.text{display: flex; justify-content: center; align-items: center; margin: 20px; font-size: 16px; color: #000000;}
+.table{display: flex; justify-content: center; align-items: center;}
+.m{display: flex; float: left; align-items: center; justify-content: center; margin: 5px; padding: 0; height: 36px; width: 36px;
+    border-radius: 3px; color: #ffffff; background: #e65100; text-decoration: none; cursor: pointer; transition: .2s;}
+.m:hover{ transform: scale(1.1); box-shadow: 0px 2px 5px rgba(0,0,0,0.5); cursor: pointer;}
+</style>
+</head>
+
+<body>
+<div class="logo"><span onclick='i()'>48 законов власти -</span><span onclick='a()'>&nbsp;Роберт Грин</span></div>
+<div id="n" class="n"></div>
+<div id="text" class="text" onclick='s()'></div>
+<div id="player"></div>
+<table class="table">
+<tr><td>
+    <div class='m' onclick='l(1)'>1</div>
+    <div class='m' onclick='l(2)'>2</div>
+    <div class='m' onclick='l(3)'>3</div>
+    <div class='m' onclick='l(4)'>4</div>
+    <div class='m' onclick='l(5)'>5</div>
+    <div class='m' onclick='l(6)'>6</div>
+</td></tr><tr><td>
+    <div class='m' onclick='l(7)'>7</div>
+    <div class='m' onclick='l(8)'>8</div>
+    <div class='m' onclick='l(9)'>9</div>
+    <div class='m' onclick='l(10)'>10</div>
+    <div class='m' onclick='l(11)'>11</div>
+    <div class='m' onclick='l(12)'>12</div>
+</td></tr><tr><td>
+    <div class='m' onclick='l(13)'>13</div>
+    <div class='m' onclick='l(14)'>14</div>
+    <div class='m' onclick='l(15)'>15</div>
+    <div class='m' onclick='l(16)'>16</div>
+    <div class='m' onclick='l(17)'>17</div>
+    <div class='m' onclick='l(18)'>18</div>
+</td></tr><tr><td>
+    <div class='m' onclick='l(19)'>19</div>
+    <div class='m' onclick='l(20)'>20</div>
+    <div class='m' onclick='l(21)'>21</div>
+    <div class='m' onclick='l(22)'>22</div>
+    <div class='m' onclick='l(23)'>23</div>
+    <div class='m' onclick='l(24)'>24</div>
+</td></tr><tr><td>
+    <div class='m' onclick='l(25)'>25</div>
+    <div class='m' onclick='l(26)'>26</div>
+    <div class='m' onclick='l(27)'>27</div>
+    <div class='m' onclick='l(28)'>28</div>
+    <div class='m' onclick='l(29)'>29</div>
+    <div class='m' onclick='l(30)'>30</div>
+</td></tr><tr><td>
+    <div class='m' onclick='l(31)'>31</div>
+    <div class='m' onclick='l(32)'>32</div>
+    <div class='m' onclick='l(33)'>33</div>
+    <div class='m' onclick='l(34)'>34</div>
+    <div class='m' onclick='l(35)'>35</div>
+    <div class='m' onclick='l(36)'>36</div>
+</td></tr><tr><td>
+    <div class='m' onclick='l(37)'>37</div>
+    <div class='m' onclick='l(38)'>38</div>
+    <div class='m' onclick='l(39)'>39</div>
+    <div class='m' onclick='l(40)'>40</div>
+    <div class='m' onclick='l(41)'>41</div>
+    <div class='m' onclick='l(42)'>42</div>
+</td></tr><tr><td>
+    <div class='m' onclick='l(43)'>43</div>
+    <div class='m' onclick='l(44)'>44</div>
+    <div class='m' onclick='l(45)'>45</div>
+    <div class='m' onclick='l(46)'>46</div>
+    <div class='m' onclick='l(47)'>47</div>
+    <div class='m' onclick='l(48)'>48</div>
+</td></tr>
+</table>
+<div class="text" onclick='sp()'>Список</div>
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+var player;
+var mid;
+var pl = 0;
+var arr = [
+    ['35Zt86lnonw', 'НИКОГДА НЕ ЗАТМЕВАЙ ГОСПОДИНА'], 
+    ['pRbGMOqJY7c', 'НЕ ДОВЕРЯЙ ДРУЗЬЯМ БЕЗГРАНИЧНО, НАУЧИСЬ ИСПОЛЬЗОВАТЬ ВРАГОВ'], 
+    ['0TuZOGucMi0', 'СКРЫВАЙ СВОИ НАМЕРЕНИЯ'],
+    ['wzTrmh79CV0', 'ВСЕГДА ГОВОРИ МЕНЬШЕ, ЧЕМ КАЖЕТСЯ НЕОБХОДИМЫМ'],
+    ['A8xrPSrIRaY', 'ОЧЕНЬ МНОГОЕ ЗАВИСИТ ОТ РЕПУТАЦИИ - БЕРЕГИ ЕЕ ЦЕНОЙ ЖИЗНИ'],
+    ['p-UgkQDOyJo', 'ЗАВОЕВЫВАЙ ВНИМАНИЕ ЛЮБОЙ ЦЕНОЙ'],
+    ['h8MM4DkXvyY', 'ЗАСТАВЬ ДРУГИХ РАБОТАТЬ НА СЕБЯ И ПОЛЬЗУЙСЯ РЕЗУЛЬТАТАМИ'],
+    ['2NdXzk5xEWc', 'ВЫНУЖДАЙ ЛЮДЕЙ ПОДОЙТИ К СЕБЕ, ЕСЛИ НУЖНО, ИСПОЛЬЗУЙ ПРИМАНКУ'],
+    ['j4Xlcxw9IS4', 'ДОБИВАЙСЯ ПОБЕДЫ ДЕЙСТВИЯМИ, А НЕ ДОВОДАМИ'],
+    ['NTjSOHfmfnU', 'ИНФЕКЦИЯ: ИЗБЕГАЙ НЕВЕСЕЛЫХ И НЕВЕЗУЧИХ'],
+    ['q9Wfp45B5vk', 'СТАРАЙСЯ, ЧТОБЫ ЛЮДИ ЗАВИСЕЛИ ОТ ТЕБЯ'],
+    ['XMD0pSF7QJY', 'ПРОЯВЛЯЙТЕ ИНОГДА ЧЕСТНОСТЬ И ЩЕДРОСТЬ, ЧТОБЫ ОБЕЗОРУЖИТЬ СВОЮ ЖЕРТВУ'],
+    ['JfPKGRJhIhg', 'ПРОСЯ О ПОМОЩИ, ВЗЫВАЙ К СВОЕКОРЫСТИЮ ЛЮДЕЙ И НИКОГДА - К ИХ МИЛОСТИ ИЛИ ВЕЛИКОДУШИЮ'],
+    ['JlehYKd4zjE', 'ИГРАЙ РОЛЬ ДРУГА, ДЕЙСТВУЙ, КАК ШПИОН'],
+    ['xT2rPwT8rqw', 'РАЗБЕЙ ВРАГА ПОЛНОСТЬЮ'],
+    ['M7rHwak7F2Y', 'ИСПОЛЬЗУЙ СВОЕ ОТСУТСТВИЕ, ЧТОБЫ ПРЕУМНОЖИТЬ УВАЖЕНИЕ И ЧЕСТЬ'],
+    ['o2zX33hRNkw', 'ДЕРЖИ ДРУГИХ В ПОДВЕШЕННОМ СОСТОЯНИИ: ПОДДЕРЖИВАЙ АТМОСФЕРУ НЕПРЕДСКАЗУЕМОСТИ'],
+    ['8IIMXhZM3WY', 'НЕ СТРОЙ КРЕПОСТЕЙ, ЧТОБЫ ЗАЩИТИТЬ СЕБЯ: ИЗОЛЯЦИЯ ОПАСНА'],
+    ['jxiSyjD9aGA', 'ЗНАЙ, С КЕМ ИМЕЕШЬ ДЕЛО: НЕ НАНОСИ ОБИДУ КОМУ НЕ СЛЕДУЕТ'],
+    ['53_9JdLMAvg', 'НИ С КЕМ НЕ ОБЪЕДИНЯЙСЯ'],
+    ['Szs0cCX_rjk', 'ПРИКИНЬСЯ ПРОСТАКОМ, ЧТОБЫ НАДУТЬ ПРОСТАКА: КАЖИСЬ ГЛУПЕЕ СВОЕЙ МИШЕНИ'],
+    ['pjBc_ui0Izg', 'ИСПОЛЬЗУЙ ТАКТИКУ КАПИТУЛЯЦИИ: ОБРАТИ СЛАБОСТИ В СИЛУ'],
+    ['QShklkwrcVY', 'КОНЦЕНТРИРУЙ СВОИ СИЛЫ'],
+    ['lD8V43yXmpk', 'ПОСТУПАЙ КАК ИСТИННЫЙ ПРИДВОРНЫЙ'],
+    ['cMmXlTMaBaI', 'СОТВОРИ СЕБЯ ЗАНОВО'],
+    ['2sO8xDMRyaY', 'ДЕРЖИ РУКИ ЧИСТЫМИ'],
+    ['oiYu1ZcYWDs', 'ИГРАЙ НА НУЖДАХ ЛЮДЕЙ, СОЗДАВАЯ АРМИЮ ФАНАТИЧНЫХ ПРИВЕРЖЕНЦЕВ'],
+    ['JbmXuz_oh6o', 'ПРИСТУПАЙ К ДЕЛУ БЕЗ КОЛЕБАНИЙ'],
+    ['Pz8LuDqleZ4', 'ПЛАНИРУЙ ВСЕ ДО САМОГО КОНЦА'],
+    ['rSTDkzJAzGY', 'ДОБИВАЯСЬ УСПЕХА, НЕ ПОКАЗЫВАЙ УСИЛИЙ'],
+    ['cq3zbDvFIOg', 'КОНТРОЛИРУЙ ВСЕ ВАРИАНТЫ: ПУСТЬ ДРУГИЕ ИГРАЮТ КАРТАМИ, КОТОРЫЕ СДАЕШЬ ТЫ'],
+    ['7W_lLMpD6Ys', 'ИГРАЙ НА ЛЮДСКИХ ФАНТАЗИЯХ'],
+    ['cALZMGG9uMc', 'ЗНАЙ СЛАБЫЕ СТРУНКИ КАЖДОГО ЧЕЛОВЕКА'],
+    ['lBE5cT_HVsg', 'БУДЬ ЦАРСТВЕННЫМ НА СВОЙ МАНЕР: ВЕДИ СЕБЯ КАК КОРОЛЬ - И БУДЕШЬ ПРИНЯТ КАК КОРОЛЬ'],
+    ['uNhH4mXqWmM', 'ОВЛАДЕЙ ИСКУССТВОМ УПРАВЛЕНИЯ ВРЕМЕНЕМ'],
+    ['kuF564g9-5s', 'ПРЕЗИРАЙ ТО, ЧЕМ НЕ МОЖЕШЬ ОБЛАДАТЬ: ИГНОРИРОВАНИЕ - ЛУЧШАЯ МЕСТЬ'],
+    ['e9lgzzzF9Rk', 'СОЗДАВАЙ НЕЗАБЫВАЕМЫЕ ЗРЕЛИЩА'],
+    ['YO-ujqm0O6Y', 'ДУМАЙ ЧТО ХОЧЕШЬ, НО ДЕЙСТВУЙ КАК ВСЕ'],
+    ['4HHhvjG1X34', 'МУТИ ВОДУ, ЧТОБЫ ПОЙМАТЬ РЫБКУ'],
+    ['Hj3tQT9jjKc', 'С ПРЕЗРЕНИЕМ ОТВЕРГАЙ БЕСПЛАТНЫЕ ОБЕДЫ'],
+    ['KR5XWgsP85Q', 'СТАРАЙСЯ НЕ ИДТИ СЛЕДОМ ЗА ВЕЛИКИМИ'],
+    ['d3V3pcisYKE', 'ПОРАЗИ ПАСТЫРЯ - И ПАСТВА РАССЕЕТСЯ'],
+    ['mZggjWzq_-M', 'ЗАВОЕВЫВАЙ СЕРДЦА И УМЫ ОКРУЖАЮЩИХ'],
+    ['TSDlB2gQUfU', 'ОБЕЗОРУЖИВАЙ И ПРИВОДИ В ЯРОСТЬ С ПОМОЩЬЮ ЭФФЕКТА ЗЕРКАЛА'],
+    ['TWdFBoZPRLI', 'ПРОПОВЕДУЙ НЕОБХОДИМОСТЬ ПЕРЕМЕН, НО НЕ СЛИШКОМ УВЛЕКАЙСЯ РЕФОРМАМИ'],
+    ['waL_HVzUvb0', 'НИ В КОЕМ СЛУЧАЕ НЕ КАЖИСЬ СЛИШКОМ СОВЕРШЕННЫМ'],
+    ['WNWEXmgV5zg', 'НЕ ЗАХОДИ ДАЛЬШЕ НАМЕЧЕННОЙ ЦЕЛИ; ПОБЕЖДАЯ, ЗНАЙ, КОГДА ОСТАНОВИТЬСЯ'],
+    ['BnmsIpuC4Bs', 'ОБРЕТИ НЕОПРЕДЕЛЕННОСТЬ ФОРМЫ']
+];
+
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {height: '0', width: '0', playerVars: {'autoplay': 0, 'controls': 0,}});
+}
+
+function i() {
+    player.loadVideoById("5el2h8IGhoc"); mid = 49; pl = 0;
+    document.getElementById('n').innerText = "";
+    document.getElementById('text').innerText = "Предисловие";
+}
+
+function a() {
+    player.loadVideoById("rqedHacqS00"); mid = 50; pl = 0;
+    document.getElementById('n').innerText = "";
+    document.getElementById('text').innerText = "Почему Роберт Грин написал 48 законов власти";
+}
+
+function s() {
+    player.stopVideo(); pl = 0; mid = "";
+    document.getElementById('n').innerText = "";
+    document.getElementById('text').innerText = "";
+}
+
+function l(n) {
+    var id = arr[n-1][0];
+    var name = arr[n-1][1];
+    document.getElementById('n').innerText = "Закон "+n;
+    document.getElementById('text').innerText = name;
+    if (id != mid) {player.loadVideoById(id); mid = id; pl = 0;}
+    else {
+        if (pl == 0) {player.pauseVideo(); pl = 1;}
+        else {player.playVideo(); pl = 0;}
+    }
+}
+
+function sp() {document.location.href="48-list.html";}
+</script>
+</body>
+</html>
